@@ -16,32 +16,33 @@ body{font-family:'Source Sans 3',sans-serif;color:var(--text);background:var(--w
 /* TOP BAR */
 .topbar{
   background:var(--navy-dark);
-  padding:7px 60px;
+  padding:7px 40px;
   display:flex;align-items:center;justify-content:space-between;
   position:fixed;top:0;left:0;width:100%;z-index:1001;
   border-bottom:1px solid rgba(200,151,42,0.2);
+  min-height:32px;
 }
-.topbar-left{font-size:0.72rem;color:rgba(255,255,255,0.45);letter-spacing:0.08em}
-.topbar-right{display:flex;align-items:center;gap:20px}
+.topbar-left{font-size:0.68rem;color:rgba(255,255,255,0.45);letter-spacing:0.06em;white-space:nowrap;flex-shrink:1;overflow:hidden;text-overflow:ellipsis;margin-right:12px}
+.topbar-right{display:flex;align-items:center;gap:12px;flex-shrink:0}
 .topbar-link{
-  display:flex;align-items:center;gap:7px;
+  display:flex;align-items:center;gap:6px;
   color:rgba(255,255,255,0.55);text-decoration:none;
-  font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
-  transition:color 0.2s;
+  font-size:0.68rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+  transition:color 0.2s;white-space:nowrap;
 }
 .topbar-link:hover{color:var(--gold-light)}
-.topbar-link svg{width:14px;height:14px;fill:currentColor}
-.topbar-sep{width:1px;height:14px;background:rgba(255,255,255,0.15)}
+.topbar-link svg{width:13px;height:13px;fill:currentColor;flex-shrink:0}
+.topbar-sep{width:1px;height:12px;background:rgba(255,255,255,0.15);flex-shrink:0}
 .lang-select{
-  display:flex;align-items:center;gap:4px;
+  display:flex;align-items:center;gap:2px;
   border-left:1px solid rgba(255,255,255,0.15);
-  padding-left:16px;margin-left:4px;
+  padding-left:10px;margin-left:2px;flex-shrink:0;
 }
 .lang-btn{
   background:none;border:none;cursor:pointer;
-  color:rgba(255,255,255,0.4);font-size:0.7rem;font-weight:700;
-  letter-spacing:0.1em;padding:3px 6px;border-radius:3px;
-  transition:all 0.2s;font-family:inherit;
+  color:rgba(255,255,255,0.4);font-size:0.68rem;font-weight:700;
+  letter-spacing:0.06em;padding:3px 5px;border-radius:3px;
+  transition:all 0.2s;font-family:inherit;white-space:nowrap;
 }
 .lang-btn:hover,.lang-btn.active{color:var(--gold-light);background:rgba(200,151,42,0.15)}
 
@@ -232,8 +233,11 @@ footer{background:#050d20;padding:44px 60px 30px}
 
 /* RESPONSIVE */
 @media(max-width:960px){
-  .topbar{padding:7px 20px}
+  .topbar{padding:6px 14px;gap:6px}
   .topbar-left{display:none}
+  .topbar-right{gap:8px}
+  .topbar-link span{display:none} /* só ícones no mobile */
+  .topbar-sep{display:none}
   nav{padding:12px 20px;top:30px}
   nav.scrolled{padding:10px 20px}
   .nav-links{display:none}
@@ -263,17 +267,17 @@ footer{background:#050d20;padding:44px 60px 30px}
   <div class="topbar-right">
     <a href="https://facebook.com/AcademiaVizelgolfe" target="_blank" class="topbar-link">
       <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-      Facebook
+      <span>Facebook</span>
     </a>
     <div class="topbar-sep"></div>
     <a href="https://instagram.com/academiavizelgolfe" target="_blank" class="topbar-link">
       <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-width="2"/></svg>
-      Instagram
+      <span>Instagram</span>
     </a>
     <div class="topbar-sep"></div>
     <a href="https://swc2026-vizela.pt" target="_blank" class="topbar-link">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-      SWC2026 Vizela
+      <span>SWC2026</span>
     </a>
     <div class="lang-select">
       <button class="lang-btn active" onclick="setLang('pt')">PT</button>
@@ -477,7 +481,7 @@ footer{background:#050d20;padding:44px 60px 30px}
     </div>
     <div id="insc-breve" data-i18n="insc_breve">As inscricoes para a Academia Vizelgolfe abrem em breve.<br>Entra em contacto connosco para ficares na lista de espera.</div>
     <div class="contact-strip">
-      <div class="contact-item"><div class="label">Email</div><div class="value"><a href="mailto:academia@academiavizelgolfe.org">academia@academiavizelgolfe.org</a></div></div>
+      <div class="contact-item"><div class="label">Email</div><div class="value"><a href="/cdn-cgi/l/email-protection#1f7e7c7e7b7a72767e5f7e7c7e7b7a72767e6976657a73787073797a31706d78"><span class="__cf_email__" data-cfemail="94f5f7f5f0f1f9fdf5d4f5f7f5f0f1f9fdf5e2fdeef1f8f3fbf8f2f1bafbe6f3">[email&#160;protected]</span></a></div></div>
       <div class="contact-item"><div class="label" data-i18n="c_local">Localizacao</div><div class="value">Vizela, Portugal</div></div>
       <div class="contact-item"><div class="label">Facebook</div><div class="value"><a href="https://facebook.com/AcademiaVizelgolfe" target="_blank">AcademiaVizelgolfe</a></div></div>
       <div class="contact-item"><div class="label">Instagram</div><div class="value"><a href="https://instagram.com/academiavizelgolfe" target="_blank">@academiavizelgolfe</a></div></div>
@@ -503,13 +507,13 @@ footer{background:#050d20;padding:44px 60px 30px}
       <a href="https://swc2026-vizela.pt" target="_blank">SWC2026</a>
       <a href="https://facebook.com/AcademiaVizelgolfe" target="_blank">Facebook</a>
       <a href="https://instagram.com/academiavizelgolfe" target="_blank">Instagram</a>
-      <a href="mailto:academia@academiavizelgolfe.org" data-i18n="foot_contact">Contacto</a>
+      <a href="/cdn-cgi/l/email-protection#1677757772737b7f775677757772737b7f77607f6c737a71797a707338796471" data-i18n="foot_contact">Contacto</a>
     </div>
   </div>
   <div class="foot-copy">© 2026 Academia Vizelgolfe · Vizelgolfe — Associacao de Minigolfe de Vizela · <span data-i18n="foot_rights">Todos os direitos reservados</span></div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ═══════════════════════════════════
 // PARA ABRIR INSCRICOES: mudar para true
 const INSCRICOES_ABERTAS = false;
@@ -735,14 +739,4 @@ updateInscStatus();
 
 // Nav scroll
 window.addEventListener('scroll', () => {
-  document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 60);
-});
-
-// Scroll reveal
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, {threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
-</body>
-</html>
+  document.getElementById('main-nav').classList.to
