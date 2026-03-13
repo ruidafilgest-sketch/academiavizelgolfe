@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academia Vizelgolfe – Minigolfe para Jovens em Vizela</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#0d1b4b;--navy-dark:#08112e;--gold:#c8972a;--gold-light:#e8b84b;--white:#fff;--light:#f7f6f2;--text:#2a2a2a;--muted:#666}
+html{scroll-behavior:smooth}
+body{font-family:'Source Sans 3',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:var(--gold)}
+
+/* TOP BAR */
+.topbar{
+  background:var(--navy-dark);
+  padding:7px 60px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:fixed;top:0;left:0;width:100%;z-index:1001;
+  border-bottom:1px solid rgba(200,151,42,0.2);
+}
+.topbar-left{font-size:0.72rem;color:rgba(255,255,255,0.45);letter-spacing:0.08em}
+.topbar-right{display:flex;align-items:center;gap:20px}
+.topbar-link{
+  display:flex;align-items:center;gap:7px;
+  color:rgba(255,255,255,0.55);text-decoration:none;
+  font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  transition:color 0.2s;
+}
+.topbar-link:hover{color:var(--gold-light)}
+.topbar-link svg{width:14px;height:14px;fill:currentColor}
+.topbar-sep{width:1px;height:14px;background:rgba(255,255,255,0.15)}
+.lang-select{
+  display:flex;align-items:center;gap:4px;
+  border-left:1px solid rgba(255,255,255,0.15);
+  padding-left:16px;margin-left:4px;
+}
+.lang-btn{
+  background:none;border:none;cursor:pointer;
+  color:rgba(255,255,255,0.4);font-size:0.7rem;font-weight:700;
+  letter-spacing:0.1em;padding:3px 6px;border-radius:3px;
+  transition:all 0.2s;font-family:inherit;
+}
+.lang-btn:hover,.lang-btn.active{color:var(--gold-light);background:rgba(200,151,42,0.15)}
+
+/* NAV */
+nav{
+  position:fixed;top:32px;left:0;width:100%;z-index:1000;
+  padding:18px 60px;transition:all 0.4s ease;
+}
+nav.scrolled{
+  background:rgba(8,17,46,0.97);padding:12px 60px;
+  backdrop-filter:blur(12px);box-shadow:0 2px 40px rgba(0,0,0,0.35);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto}
+.nav-logo{display:flex;align-items:center;gap:13px;text-decoration:none}
+.nav-logo img{width:46px;height:46px;border-radius:50%;border:2px solid var(--gold);transition:transform 0.4s}
+.nav-logo:hover img{transform:rotate(12deg)}
+.nav-logo-text strong{color:#fff;font-family:'Playfair Display',serif;font-size:1rem;display:block;line-height:1.1}
+.nav-logo-text span{color:var(--gold);font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{
+  color:rgba(255,255,255,0.82);text-decoration:none;
+  font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  padding-bottom:3px;border-bottom:1px solid transparent;transition:all 0.25s;
+}
+.nav-links a:hover{color:#fff;border-color:var(--gold)}
+.nav-cta{
+  background:var(--gold);color:var(--navy);
+  padding:9px 22px;border-radius:3px;text-decoration:none;
+  font-size:0.76rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  transition:all 0.25s;
+}
+.nav-cta:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 6px 18px rgba(200,151,42,0.4)}
+
+/* HERO */
+.hero{height:100vh;min-height:640px;position:relative;display:flex;align-items:center;overflow:hidden;padding-top:64px}
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:url('imgs/hero.jpg');
+  background-size:cover;background-position:center 40%;
+  filter:brightness(0.7);
+  animation:slowzoom 30s ease-in-out infinite alternate;
+}
+@keyframes slowzoom{from{transform:scale(1)}to{transform:scale(1.07)}}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(100deg,rgba(8,17,46,0.82) 35%,rgba(8,17,46,0.15) 100%)}
+.hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 60px;width:100%}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid rgba(200,151,42,0.55);color:var(--gold-light);
+  font-size:0.72rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;
+  padding:8px 20px;border-radius:30px;margin-bottom:26px;
+  background:rgba(200,151,42,0.08);animation:fadeup 0.7s ease both;
+}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold-light)}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,7.5vw,5.8rem);color:#fff;font-weight:900;line-height:1.0;margin-bottom:22px;animation:fadeup 0.8s 0.1s ease both}
+.hero h1 em{color:var(--gold-light);font-style:normal}
+.hero-desc{font-size:clamp(1rem,1.7vw,1.2rem);color:rgba(255,255,255,0.88);max-width:500px;margin-bottom:42px;font-weight:300;line-height:1.85;animation:fadeup 0.8s 0.2s ease both}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;animation:fadeup 0.8s 0.3s ease both}
+.btn-gold{display:inline-block;background:var(--gold);color:var(--navy);padding:15px 36px;border-radius:3px;text-decoration:none;font-weight:700;font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;transition:all 0.25s;border:none;cursor:pointer}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-3px);box-shadow:0 10px 28px rgba(200,151,42,0.45)}
+.btn-outline{display:inline-block;border:2px solid rgba(255,255,255,0.45);color:#fff;padding:13px 32px;border-radius:3px;text-decoration:none;font-weight:600;font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;transition:all 0.25s}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,0.08)}
+.hero-stats{position:absolute;bottom:50px;right:60px;z-index:2;display:flex;gap:44px;animation:fadeup 1s 0.5s ease both}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.4rem;color:var(--gold-light);font-weight:700;line-height:1}
+.stat-label{font-size:0.66rem;color:rgba(255,255,255,0.5);letter-spacing:0.12em;text-transform:uppercase;margin-top:4px}
+.hero-scroll{position:absolute;bottom:42px;left:60px;z-index:2;display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.4);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;animation:fadeup 1s 0.6s ease both}
+.hero-scroll-line{width:36px;height:1px;background:rgba(255,255,255,0.25)}
+@keyframes fadeup{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+/* STRIP */
+.strip{background:var(--gold);padding:15px 60px;display:flex;justify-content:center;align-items:center;gap:48px;flex-wrap:wrap}
+.strip-item{font-size:0.73rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--navy);display:flex;align-items:center;gap:10px}
+.strip-sep{width:4px;height:4px;border-radius:50%;background:rgba(13,27,75,0.3)}
+
+/* SECTIONS */
+section{padding:100px 60px}
+.container{max-width:1200px;margin:0 auto}
+.section-label{font-size:0.7rem;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.1rem);color:var(--navy);font-weight:700;line-height:1.1;margin-bottom:18px}
+.section-sub{font-size:1.05rem;color:var(--muted);line-height:1.85;max-width:580px}
+
+/* SOBRE */
+.sobre{background:var(--light)}
+.sobre-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:60px}
+.sobre-imgs{position:relative;height:520px}
+.sobre-img-main{position:absolute;top:0;left:0;width:78%;height:420px;object-fit:cover;border-radius:2px;box-shadow:0 20px 60px rgba(0,0,0,0.18)}
+.sobre-img-float{position:absolute;bottom:0;right:0;width:55%;height:260px;object-fit:cover;border-radius:2px;border:6px solid var(--white);box-shadow:0 16px 40px rgba(0,0,0,0.2)}
+.sobre-badge{position:absolute;top:30px;right:24px;background:var(--navy);color:#fff;padding:16px 20px;border-radius:2px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.35);z-index:2}
+.sobre-badge strong{display:block;font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold-light)}
+.sobre-badge span{font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.6)}
+.sobre-text p{font-size:1.02rem;line-height:1.9;color:#444;margin-bottom:18px}
+.valores{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:32px}
+.valor{background:var(--white);padding:18px 20px;border-radius:2px;border-bottom:3px solid var(--gold);transition:transform 0.2s,box-shadow 0.2s;cursor:default}
+.valor:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.09)}
+.valor h4{font-size:0.78rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px}
+.valor p{font-size:0.88rem;color:var(--muted);line-height:1.5}
+
+/* PROGRAMA */
+.programa{background:var(--navy);position:relative;overflow:hidden}
+.programa::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:rgba(200,151,42,0.05);pointer-events:none}
+.programa .section-title{color:#fff}
+.programa .section-sub{color:rgba(255,255,255,0.6)}
+.prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.prog-card{background:rgba(255,255,255,0.05);border:1px solid rgba(200,151,42,0.2);border-radius:3px;padding:36px 28px;transition:all 0.35s;position:relative;overflow:hidden}
+.prog-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(200,151,42,0.08),transparent);opacity:0;transition:opacity 0.35s}
+.prog-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 20px 50px rgba(0,0,0,0.3)}
+.prog-card:hover::before{opacity:1}
+.prog-number{font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;color:rgba(200,151,42,0.14);line-height:1;margin-bottom:14px}
+.prog-age{display:inline-block;background:var(--gold);color:var(--navy);font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:14px}
+.prog-card h3{font-family:'Playfair Display',serif;color:#fff;font-size:1.5rem;margin-bottom:10px}
+.prog-card p{color:rgba(255,255,255,0.62);font-size:0.95rem;line-height:1.75;margin-bottom:14px}
+.prog-card ul{color:rgba(255,255,255,0.55);font-size:0.88rem;line-height:2;padding-left:16px}
+.prog-card ul li::marker{color:var(--gold)}
+
+/* CAMPO */
+.campo{background:var(--light)}
+.galeria-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:280px 280px;gap:10px;margin-top:54px}
+.gal-item{overflow:hidden;border-radius:2px;position:relative;cursor:pointer}
+.gal-item.featured{grid-column:span 2;grid-row:span 2}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.55s ease}
+.gal-item:hover img{transform:scale(1.07)}
+.gal-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(8,17,46,0.78));color:#fff;padding:20px 16px 12px;font-size:0.76rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;transform:translateY(100%);transition:transform 0.3s}
+.gal-item:hover .gal-caption{transform:translateY(0)}
+
+/* COMPETICAO */
+.competicao{background:var(--white)}
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:60px}
+.comp-imgs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.comp-imgs img{width:100%;height:220px;object-fit:cover;border-radius:2px;transition:transform 0.3s}
+.comp-imgs img:hover{transform:scale(1.03)}
+.comp-imgs img:first-child{grid-column:span 2;height:260px}
+.comp-text p{font-size:1.02rem;line-height:1.9;color:#444;margin-bottom:18px}
+.swc-banner{background:var(--navy);color:#fff;padding:22px 26px;border-radius:3px;margin-top:28px;border-left:4px solid var(--gold);transition:transform 0.2s}
+.swc-banner:hover{transform:translateX(4px)}
+.swc-banner strong{color:var(--gold-light);display:block;font-size:1.05rem;margin-bottom:6px}
+.swc-banner p{font-size:0.9rem;color:rgba(255,255,255,0.72);margin:0;line-height:1.6}
+
+/* INSCRICOES */
+.inscricoes{background:var(--navy);text-align:center;position:relative;overflow:hidden}
+.inscricoes::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;border:1px solid rgba(200,151,42,0.08);pointer-events:none}
+.inscricoes .container{position:relative;z-index:1}
+.inscricoes .section-title{color:#fff}
+.inscricoes .section-sub{color:rgba(255,255,255,0.62);margin:0 auto 46px}
+.status-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 22px;border-radius:30px;font-size:0.73rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:34px}
+.status-badge.closed{background:rgba(200,151,42,0.12);border:1px solid rgba(200,151,42,0.4);color:var(--gold-light)}
+.status-badge.open{background:rgba(50,205,50,0.12);border:1px solid rgba(50,205,50,0.4);color:#6dff6d}
+.status-dot{width:7px;height:7px;border-radius:50%;animation:pulse 2s infinite}
+.status-badge.closed .status-dot{background:var(--gold)}
+.status-badge.open .status-dot{background:#6dff6d}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+#insc-form-wrap{max-width:520px;margin:0 auto}
+#insc-form-wrap.hidden{display:none}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.form-group{display:flex;flex-direction:column;gap:6px;text-align:left}
+.form-group label{font-size:0.73rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55)}
+.form-group input,.form-group select{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);border-radius:3px;padding:12px 16px;color:#fff;font-size:0.95rem;font-family:inherit;transition:border-color 0.2s;outline:none}
+.form-group input::placeholder{color:rgba(255,255,255,0.3)}
+.form-group input:focus,.form-group select:focus{border-color:var(--gold)}
+.form-group select option{background:var(--navy);color:#fff}
+.form-full{grid-column:span 2}
+.btn-submit{width:100%;background:var(--gold);color:var(--navy);border:none;padding:16px;border-radius:3px;font-family:inherit;font-weight:700;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:all 0.25s;margin-top:8px}
+.btn-submit:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,151,42,0.4)}
+#insc-breve{color:rgba(255,255,255,0.62);font-size:1.05rem;line-height:1.8;max-width:480px;margin:0 auto}
+#insc-breve.hidden{display:none}
+.contact-strip{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-top:50px;padding-top:40px;border-top:1px solid rgba(255,255,255,0.1)}
+.contact-item .label{font-size:0.66rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.contact-item .value{color:rgba(255,255,255,0.78);font-size:0.95rem}
+.contact-item a{color:rgba(255,255,255,0.78);text-decoration:none;transition:color 0.2s}
+.contact-item a:hover{color:var(--gold-light)}
+
+/* FOOTER */
+footer{background:#050d20;padding:44px 60px 30px}
+.foot-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px}
+.foot-logo{display:flex;align-items:center;gap:14px}
+.foot-logo img{width:42px;height:42px;border-radius:50%;border:1px solid rgba(200,151,42,0.5)}
+.foot-logo-text strong{color:rgba(255,255,255,0.8);font-family:'Playfair Display',serif;font-size:0.95rem;display:block}
+.foot-logo-text span{color:rgba(255,255,255,0.32);font-size:0.72rem}
+.foot-links{display:flex;gap:26px;flex-wrap:wrap}
+.foot-links a{color:rgba(255,255,255,0.38);text-decoration:none;font-size:0.82rem;transition:color 0.2s}
+.foot-links a:hover{color:var(--gold)}
+.foot-copy{max-width:1200px;margin:28px auto 0;color:rgba(255,255,255,0.18);font-size:0.74rem;text-align:center;padding-top:22px;border-top:1px solid rgba(255,255,255,0.06)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .topbar{padding:7px 20px}
+  .topbar-left{display:none}
+  nav{padding:12px 20px;top:30px}
+  nav.scrolled{padding:10px 20px}
+  .nav-links{display:none}
+  section{padding:70px 24px}
+  .hero-content{padding:0 24px}
+  .hero-stats{right:24px;gap:24px}
+  .hero-scroll{left:24px}
+  .sobre-grid,.comp-grid{grid-template-columns:1fr}
+  .sobre-imgs{height:300px}
+  .sobre-img-main{width:100%;height:300px;position:relative}
+  .sobre-img-float,.sobre-badge{display:none}
+  .prog-grid{grid-template-columns:1fr}
+  .galeria-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .gal-item.featured{grid-column:span 2}
+  .form-row{grid-template-columns:1fr}
+  .form-full{grid-column:span 1}
+  footer{padding:32px 24px 20px}
+  .strip{padding:12px 20px;gap:20px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span class="topbar-left">Vizelgolfe — Associação de Minigolfe de Vizela</span>
+  <div class="topbar-right">
+    <a href="https://facebook.com/AcademiaVizelgolfe" target="_blank" class="topbar-link">
+      <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      Facebook
+    </a>
+    <div class="topbar-sep"></div>
+    <a href="https://instagram.com/academiavizelgolfe" target="_blank" class="topbar-link">
+      <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-width="2"/></svg>
+      Instagram
+    </a>
+    <div class="topbar-sep"></div>
+    <a href="https://swc2026-vizela.pt" target="_blank" class="topbar-link">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      SWC2026 Vizela
+    </a>
+    <div class="lang-select">
+      <button class="lang-btn active" onclick="setLang('pt')">PT</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="imgs/logo.png" alt="Academia Vizelgolfe">
+      <div class="nav-logo-text">
+        <strong>Academia Vizelgolfe</strong>
+        <span>Vizela · Portugal</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#sobre" data-i18n="nav_sobre">Sobre</a></li>
+      <li><a href="#programa" data-i18n="nav_programa">Programa</a></li>
+      <li><a href="#campo" data-i18n="nav_campo">Campo</a></li>
+      <li><a href="#competicao" data-i18n="nav_comp">Competição</a></li>
+      <li><a href="#inscricoes" data-i18n="nav_insc">Inscrições</a></li>
+    </ul>
+    <a href="#inscricoes" class="nav-cta" data-i18n="nav_cta">Inscrever</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge" data-i18n="hero_badge">Vizela · Portugal · 2026</div>
+    <h1>Academia<br><em>Vizelgolfe</em></h1>
+    <p class="hero-desc" data-i18n="hero_desc">Formação de jovens dos 7 aos 16 anos na modalidade de minigolfe. Disciplina, técnica e valores desportivos em Vizela.</p>
+    <div class="hero-btns">
+      <a href="#inscricoes" class="btn-gold" data-i18n="hero_btn1">Inscrições em Breve</a>
+      <a href="#sobre" class="btn-outline" data-i18n="hero_btn2">Conhecer a Academia</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">18+</div><div class="stat-label" data-i18n="stat1">Anos de História</div></div>
+    <div class="stat"><div class="stat-num">7–16</div><div class="stat-label" data-i18n="stat2">Anos de Idade</div></div>
+    <div class="stat"><div class="stat-num">2026</div><div class="stat-label" data-i18n="stat3">Ano de Arranque</div></div>
+  </div>
+  <div class="hero-scroll"><div class="hero-scroll-line"></div><span data-i18n="scroll">Explorar</span></div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item" data-i18n="strip1">Formação Estruturada</div>
+  <div class="strip-sep"></div>
+  <div class="strip-item" data-i18n="strip2">Campo de Referência Nacional</div>
+  <div class="strip-sep"></div>
+  <div class="strip-item" data-i18n="strip3">Competição Regional e Nacional</div>
+  <div class="strip-sep"></div>
+  <div class="strip-item">Vizela · 2026</div>
+</div>
+
+<!-- SOBRE -->
+<section class="sobre" id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="sobre-imgs reveal">
+        <img class="sobre-img-main" src="imgs/sobre1.jpg" alt="Campo Vizela">
+        <img class="sobre-img-float" src="imgs/sobre2.jpg" alt="Evento">
+        <div class="sobre-badge"><strong>2026</strong><span data-i18n="badge_arranque">Arranque</span></div>
+      </div>
+      <div class="sobre-text reveal reveal-delay-1">
+        <span class="section-label" data-i18n="sobre_label">Quem Somos</span>
+        <h2 class="section-title" data-i18n="sobre_title">Um projeto com raízes profundas em Vizela</h2>
+        <p data-i18n="sobre_p1">A Academia Vizelgolfe nasce da experiência e paixão da Associação de Minigolfe de Vizela — Vizelgolfe — com um historial competitivo de décadas e uma ligação profunda a esta modalidade.</p>
+        <p data-i18n="sobre_p2">O nosso objetivo é proporcionar a crianças e jovens entre os 7 e os 16 anos um programa de formação estruturado, com metodologia própria, num dos melhores campos de minigolfe de Portugal.</p>
+        <p data-i18n="sobre_p3">Em 2026, Vizela acolhe o Campeonato Mundial Séniors de Minigolfe — SWC2026. A Academia é o nosso compromisso com o futuro da modalidade.</p>
+        <div class="valores">
+          <div class="valor"><h4 data-i18n="v1t">Disciplina</h4><p data-i18n="v1p">Metodologia estruturada e progressiva</p></div>
+          <div class="valor"><h4 data-i18n="v2t">Fair-Play</h4><p data-i18n="v2p">Valores desportivos acima de tudo</p></div>
+          <div class="valor"><h4 data-i18n="v3t">Evolucao</h4><p data-i18n="v3p">Avaliacao continua e personalizada</p></div>
+          <div class="valor"><h4 data-i18n="v4t">Comunidade</h4><p data-i18n="v4p">Espírito de equipa e pertença</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMA -->
+<section class="programa" id="programa">
+  <div class="container">
+    <span class="section-label" data-i18n="prog_label">Formação</span>
+    <h2 class="section-title" data-i18n="prog_title">Programa de Treino</h2>
+    <p class="section-sub" data-i18n="prog_sub">Três níveis adaptados à idade e experiência de cada atleta, com progressão clara e objetivos definidos.</p>
+    <div class="prog-grid">
+      <div class="prog-card reveal">
+        <div class="prog-number">01</div>
+        <div class="prog-age" data-i18n="p1_age">7 – 10 anos</div>
+        <h3 data-i18n="p1_title">Iniciação</h3>
+        <p data-i18n="p1_desc">Primeiro contacto com o minigolfe. Desenvolvimento motor, conhecimento do material e regras básicas da modalidade.</p>
+        <ul>
+          <li data-i18n="p1_l1">Coordenação e equilíbrio</li>
+          <li data-i18n="p1_l2">Regras fundamentais</li>
+          <li data-i18n="p1_l3">Jogos lúdicos no campo</li>
+          <li data-i18n="p1_l4">Espírito desportivo</li>
+        </ul>
+      </div>
+      <div class="prog-card reveal reveal-delay-1">
+        <div class="prog-number">02</div>
+        <div class="prog-age" data-i18n="p2_age">11 – 13 anos</div>
+        <h3 data-i18n="p2_title">Desenvolvimento</h3>
+        <p data-i18n="p2_desc">Técnica de tacada, leitura do campo e primeiras competições internas e regionais com representação do clube.</p>
+        <ul>
+          <li data-i18n="p2_l1">Técnica e postura</li>
+          <li data-i18n="p2_l2">Estratégia de jogo</li>
+          <li data-i18n="p2_l3">Competições regionais</li>
+          <li data-i18n="p2_l4">Preparação física básica</li>
+        </ul>
+      </div>
+      <div class="prog-card reveal reveal-delay-2">
+        <div class="prog-number">03</div>
+        <div class="prog-age" data-i18n="p3_age">14 – 16 anos</div>
+        <h3 data-i18n="p3_title">Especialização</h3>
+        <p data-i18n="p3_desc">Preparação para competição nacional. Análise tática, gestão de pressão e representação de alto nível.</p>
+        <ul>
+          <li data-i18n="p3_l1">Alta competição</li>
+          <li data-i18n="p3_l2">Análise e tática</li>
+          <li data-i18n="p3_l3">Campeonatos nacionais</li>
+          <li data-i18n="p3_l4">Mentoria individual</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAMPO -->
+<section class="campo" id="campo">
+  <div class="container">
+    <span class="section-label" data-i18n="campo_label">Instalações</span>
+    <h2 class="section-title" data-i18n="campo_title">O Campo de Vizela</h2>
+    <p class="section-sub" data-i18n="campo_sub">Um campo de referência nacional, integrado na natureza, com as condições ideais para formação e competição internacional.</p>
+    <div class="galeria-grid reveal">
+      <div class="gal-item featured"><img src="imgs/sobre3.jpg" alt="Campo Vizela"><div class="gal-caption" data-i18n="gal1">Campo Principal — Vizela</div></div>
+      <div class="gal-item"><img src="imgs/galeria1.jpg" alt="Vista aerea"><div class="gal-caption" data-i18n="gal2">Vista Panorâmica</div></div>
+      <div class="gal-item"><img src="imgs/galeria2.jpg" alt="Pistas"><div class="gal-caption" data-i18n="gal3">Pistas de Competição</div></div>
+      <div class="gal-item"><img src="imgs/galeria3.jpg" alt="Jogo"><div class="gal-caption" data-i18n="gal4">Em Competição</div></div>
+      <div class="gal-item"><img src="imgs/galeria4.jpg" alt="Jornada"><div class="gal-caption" data-i18n="gal5">Jornada Nacional</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETICAO -->
+<section class="competicao" id="competicao">
+  <div class="container">
+    <div class="comp-grid">
+      <div class="comp-imgs reveal">
+        <img src="imgs/galeria5.jpg" alt="Nations Cup">
+        <img src="imgs/comp1.jpg" alt="Comunidade">
+        <img src="imgs/comp2.jpg" alt="Vizela">
+      </div>
+      <div class="comp-text reveal reveal-delay-1">
+        <span class="section-label" data-i18n="comp_label">Alta Competição</span>
+        <h2 class="section-title" data-i18n="comp_title">Do treino ao pódio</h2>
+        <p data-i18n="comp_p1">Os alunos da Academia Vizelgolfe participam em competições regionais e nacionais, representando Vizela com orgulho, determinação e espírito desportivo.</p>
+        <p data-i18n="comp_p2">A Vizelgolfe tem décadas de historial competitivo e uma comunidade forte. A Academia é a porta de entrada para os jovens neste universo.</p>
+        <div class="swc-banner">
+          <strong data-i18n="swc_title">Campeonato Mundial Seniores 2026 — Vizela</strong>
+          <p data-i18n="swc_desc">Vizelgolfe acolhe o SWC2026 em outubro de 2026. Um marco histórico para o minigolfe português e para a nossa cidade. <a href="https://swc2026-vizela.pt" style="color:var(--gold-light)" target="_blank">swc2026-vizela.pt</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSCRICOES -->
+<section class="inscricoes" id="inscricoes">
+  <div class="container">
+    <span class="section-label" data-i18n="insc_label">Junta-te a nós</span>
+    <h2 class="section-title" data-i18n="insc_title">Inscrições</h2>
+    <div id="insc-status"></div>
+    <div id="insc-form-wrap" class="hidden">
+      <p style="color:rgba(255,255,255,0.65);margin-bottom:28px;font-size:1.05rem;line-height:1.8" data-i18n="insc_intro">Preenche o formulário para inscreveres o teu filho ou educando na Academia Vizelgolfe.</p>
+      <div class="form-row">
+        <div class="form-group"><label data-i18n="f_atleta">Nome do Atleta</label><input type="text" data-i18n-ph="f_atleta_ph" placeholder="Nome completo"></div>
+        <div class="form-group"><label data-i18n="f_nasc">Data de Nascimento</label><input type="date"></div>
+        <div class="form-group"><label data-i18n="f_enc">Nome do Encarregado</label><input type="text" data-i18n-ph="f_enc_ph" placeholder="Nome completo"></div>
+        <div class="form-group"><label data-i18n="f_tel">Telefone</label><input type="tel" placeholder="+351 9xx xxx xxx"></div>
+        <div class="form-group form-full"><label>Email</label><input type="email" placeholder="email@exemplo.com"></div>
+        <div class="form-group form-full">
+          <label data-i18n="f_nivel">Nível</label>
+          <select>
+            <option value="" data-i18n="f_sel">Selecionar nível</option>
+            <option data-i18n="f_n1">Iniciação (7–10 anos)</option>
+            <option data-i18n="f_n2">Desenvolvimento (11–13 anos)</option>
+            <option data-i18n="f_n3">Especialização (14–16 anos)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-submit" onclick="submitForm()" data-i18n="f_submit">Submeter Inscrição</button>
+    </div>
+    <div id="insc-breve" data-i18n="insc_breve">As inscrições para a Academia Vizelgolfe abrem em breve.<br>Entra em contacto connosco para ficares na lista de espera.</div>
+    <div class="contact-strip">
+      <div class="contact-item"><div class="label">Email</div><div class="value"><a href="mailto:academia@academiavizelgolfe.org">academia@academiavizelgolfe.org</a></div></div>
+      <div class="contact-item"><div class="label" data-i18n="c_local">Localização</div><div class="value">Vizela, Portugal</div></div>
+      <div class="contact-item"><div class="label">Facebook</div><div class="value"><a href="https://facebook.com/AcademiaVizelgolfe" target="_blank">AcademiaVizelgolfe</a></div></div>
+      <div class="contact-item"><div class="label">Instagram</div><div class="value"><a href="https://instagram.com/academiavizelgolfe" target="_blank">@academiavizelgolfe</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo">
+      <img src="imgs/logo2.png" alt="Academia Vizelgolfe">
+      <div class="foot-logo-text">
+        <strong>Academia Vizelgolfe</strong>
+        <span>Vizelgolfe — Associação de Minigolfe de Vizela</span>
+      </div>
+    </div>
+    <div class="foot-links">
+      <a href="#sobre" data-i18n="nav_sobre">Sobre</a>
+      <a href="#programa" data-i18n="nav_programa">Programa</a>
+      <a href="#campo" data-i18n="nav_campo">Campo</a>
+      <a href="#competicao" data-i18n="nav_comp">Competição</a>
+      <a href="https://swc2026-vizela.pt" target="_blank">SWC2026</a>
+      <a href="https://facebook.com/AcademiaVizelgolfe" target="_blank">Facebook</a>
+      <a href="https://instagram.com/academiavizelgolfe" target="_blank">Instagram</a>
+      <a href="mailto:academia@academiavizelgolfe.org" data-i18n="foot_contact">Contacto</a>
+    </div>
+  </div>
+  <div class="foot-copy">© 2026 Academia Vizelgolfe · Vizelgolfe — Associação de Minigolfe de Vizela · <span data-i18n="foot_rights">Todos os direitos reservados</span></div>
+</footer>
+
+<script>
+// ═══════════════════════════════════
+// PARA ABRIR INSCRICOES: mudar para true
+const INSCRICOES_ABERTAS = false;
+// ═══════════════════════════════════
+
+// TRADUCOES
+const i18n = {
+  pt: {
+    nav_sobre:'Sobre', nav_programa:'Programa', nav_campo:'Campo',
+    nav_comp:'Competição', nav_insc:'Inscrições', nav_cta:'Inscrever',
+    hero_badge:'Vizela · Portugal · 2026',
+    hero_desc:'Formação de jovens dos 7 aos 16 anos na modalidade de minigolfe. Disciplina, técnica e valores desportivos em Vizela.',
+    hero_btn1:'Inscrições em Breve', hero_btn2:'Conhecer a Academia',
+    stat1:'Anos de História', stat2:'Anos de Idade', stat3:'Ano de Arranque',
+    scroll:'Explorar',
+    strip1:'Formação Estruturada', strip2:'Campo de Referência Nacional', strip3:'Competição Regional e Nacional',
+    badge_arranque:'Arranque',
+    sobre_label:'Quem Somos', sobre_title:'Um projeto com raízes profundas em Vizela',
+    sobre_p1:'A Academia Vizelgolfe nasce da experiência e paixão da Associação de Minigolfe de Vizela — Vizelgolfe — com um historial competitivo de décadas e uma ligação profunda a esta modalidade.',
+    sobre_p2:'O nosso objetivo é proporcionar a crianças e jovens entre os 7 e os 16 anos um programa de formação estruturado, com metodologia própria, num dos melhores campos de minigolfe de Portugal.',
+    sobre_p3:'Em 2026, Vizela acolhe o Campeonato Mundial Seniores de Minigolfe — SWC2026. A Academia é o nosso compromisso com o futuro da modalidade.',
+    v1t:'Disciplina', v1p:'Metodologia estruturada e progressiva',
+    v2t:'Fair-Play', v2p:'Valores desportivos acima de tudo',
+    v3t:'Evolução', v3p:'Avaliação contínua e personalizada',
+    v4t:'Comunidade', v4p:'Espírito de equipa e pertença',
+    prog_label:'Formação', prog_title:'Programa de Treino',
+    prog_sub:'Três níveis adaptados à idade e experiência de cada atleta, com progressão clara e objetivos definidos.',
+    p1_age:'7 – 10 anos', p1_title:'Iniciação', p1_desc:'Primeiro contacto com o minigolfe. Desenvolvimento motor, conhecimento do material e regras básicas da modalidade.',
+    p1_l1:'Coordenação e equilíbrio', p1_l2:'Regras fundamentais', p1_l3:'Jogos lúdicos no campo', p1_l4:'Espírito desportivo',
+    p2_age:'11 – 13 anos', p2_title:'Desenvolvimento', p2_desc:'Técnica de tacada, leitura do campo e primeiras competições internas e regionais com representação do clube.',
+    p2_l1:'Técnica e postura', p2_l2:'Estratégia de jogo', p2_l3:'Competições regionais', p2_l4:'Preparação física básica',
+    p3_age:'14 – 16 anos', p3_title:'Especialização', p3_desc:'Preparação para competição nacional. Análise tática, gestão de pressão e representação de alto nível.',
+    p3_l1:'Alta competição', p3_l2:'Análise e tática', p3_l3:'Campeonatos nacionais', p3_l4:'Mentoria individual',
+    campo_label:'Instalações', campo_title:'O Campo de Vizela', campo_sub:'Um campo de referência nacional, integrado na natureza, com as condições ideais para formação e competição internacional.',
+    gal1:'Campo Principal — Vizela', gal2:'Vista Panorâmica', gal3:'Pistas de Competição', gal4:'Em Competição', gal5:'Jornada Nacional',
+    comp_label:'Alta Competição', comp_title:'Do treino ao pódio',
+    comp_p1:'Os alunos da Academia Vizelgolfe participam em competições regionais e nacionais, representando Vizela com orgulho, determinação e espírito desportivo.',
+    comp_p2:'A Vizelgolfe tem décadas de historial competitivo e uma comunidade forte. A Academia é a porta de entrada para os jovens neste universo.',
+    swc_title:'Campeonato Mundial Seniores 2026 — Vizela',
+    swc_desc:'Vizelgolfe acolhe o SWC2026 em outubro de 2026. Um marco histórico para o minigolfe português e para a nossa cidade.',
+    insc_label:'Junta-te a nós', insc_title:'Inscrições',
+    insc_intro:'Preenche o formulário para inscreveres o teu filho ou educando na Academia Vizelgolfe.',
+    insc_breve:'As inscrições para a Academia Vizelgolfe abrem em breve.<br>Entra em contacto connosco para ficares na lista de espera.',
+    f_atleta:'Nome do Atleta', f_atleta_ph:'Nome completo',
+    f_nasc:'Data de Nascimento', f_enc:'Nome do Encarregado', f_enc_ph:'Nome completo',
+    f_tel:'Telefone', f_nivel:'Nível', f_sel:'Selecionar nível',
+    f_n1:'Iniciação (7–10 anos)', f_n2:'Desenvolvimento (11–13 anos)', f_n3:'Especialização (14–16 anos)',
+    f_submit:'Submeter Inscrição',
+    c_local:'Localização', foot_contact:'Contacto', foot_rights:'Todos os direitos reservados',
+    status_closed:'Inscrições em Breve', status_open:'Inscrições Abertas',
+    alert_submit:'Obrigado! A sua inscrição foi recebida. Entraremos em contacto em breve.'
+  },
+  en: {
+    nav_sobre:'About', nav_programa:'Programme', nav_campo:'Course', nav_comp:'Competition', nav_insc:'Enrolment', nav_cta:'Enrol',
+    hero_badge:'Vizela · Portugal · 2026',
+    hero_desc:'Youth training from age 7 to 16 in minigolf. Discipline, technique and sporting values in Vizela.',
+    hero_btn1:'Enrolment Coming Soon', hero_btn2:'Discover the Academy',
+    stat1:'Years of History', stat2:'Age Range', stat3:'Launch Year',
+    scroll:'Explore',
+    strip1:'Structured Training', strip2:'National Reference Course', strip3:'Regional and National Competition',
+    badge_arranque:'Launch',
+    sobre_label:'Who We Are', sobre_title:'A project with deep roots in Vizela',
+    sobre_p1:'Academia Vizelgolfe is born from the experience and passion of the Minigolf Association of Vizela — Vizelgolfe — with decades of competitive history and a deep connection to this sport.',
+    sobre_p2:'Our goal is to provide children and young people aged 7 to 16 with a structured training programme, using our own methodology, on one of the best minigolf courses in Portugal.',
+    sobre_p3:'In 2026, Vizela hosts the Senior Minigolf World Championship — SWC2026. The Academy is our commitment to the future of the sport.',
+    v1t:'Discipline', v1p:'Structured and progressive methodology',
+    v2t:'Fair-Play', v2p:'Sporting values above all',
+    v3t:'Progress', v3p:'Continuous and personalised evaluation',
+    v4t:'Community', v4p:'Team spirit and belonging',
+    prog_label:'Training', prog_title:'Training Programme',
+    prog_sub:'Three levels adapted to the age and experience of each athlete, with clear progression and defined goals.',
+    p1_age:'7 – 10 years', p1_title:'Introduction', p1_desc:'First contact with minigolf. Motor development, knowledge of equipment and basic rules.',
+    p1_l1:'Coordination and balance', p1_l2:'Basic rules', p1_l3:'Fun games on the course', p1_l4:'Sporting spirit',
+    p2_age:'11 – 13 years', p2_title:'Development', p2_desc:'Stroke technique, course reading and first internal and regional competitions.',
+    p2_l1:'Technique and posture', p2_l2:'Game strategy', p2_l3:'Regional competitions', p2_l4:'Basic physical preparation',
+    p3_age:'14 – 16 years', p3_title:'Specialisation', p3_desc:'Preparation for national competition. Tactical analysis, pressure management and high-level representation.',
+    p3_l1:'High competition', p3_l2:'Analysis and tactics', p3_l3:'National championships', p3_l4:'Individual mentoring',
+    campo_label:'Facilities', campo_title:'The Vizela Course', campo_sub:'A national reference course, integrated in nature, with ideal conditions for training and international competition.',
+    gal1:'Main Course — Vizela', gal2:'Panoramic View', gal3:'Competition Holes', gal4:'In Competition', gal5:'National Round',
+    comp_label:'High Competition', comp_title:'From training to the podium',
+    comp_p1:'Academia Vizelgolfe athletes compete in regional and national competitions, representing Vizela with pride, determination and sporting spirit.',
+    comp_p2:'Vizelgolfe has decades of competitive history and a strong community. The Academy is the entry point for young people into this world.',
+    swc_title:'Seniors World Championship 2026 — Vizela',
+    swc_desc:'Vizelgolfe hosts SWC2026 in October 2026. A historic milestone for Portuguese minigolf and for our city.',
+    insc_label:'Join Us', insc_title:'Enrolment',
+    insc_intro:'Fill in the form to enrol your child in the Academia Vizelgolfe.',
+    insc_breve:'Enrolments for Academia Vizelgolfe open soon.<br>Contact us to join the waiting list.',
+    f_atleta:'Athlete Name', f_atleta_ph:'Full name', f_nasc:'Date of Birth', f_enc:'Guardian Name', f_enc_ph:'Full name',
+    f_tel:'Phone', f_nivel:'Level', f_sel:'Select level',
+    f_n1:'Introduction (7–10 years)', f_n2:'Development (11–13 years)', f_n3:'Specialisation (14–16 years)',
+    f_submit:'Submit Enrolment',
+    c_local:'Location', foot_contact:'Contact', foot_rights:'All rights reserved',
+    status_closed:'Enrolment Coming Soon', status_open:'Enrolment Open',
+    alert_submit:'Thank you! Your enrolment has been received. We will be in touch shortly.'
+  },
+  es: {
+    nav_sobre:'Sobre', nav_programa:'Programa', nav_campo:'Campo', nav_comp:'Competicion', nav_insc:'Inscripciones', nav_cta:'Inscribirse',
+    hero_badge:'Vizela · Portugal · 2026',
+    hero_desc:'Formacion de jovenes de 7 a 16 anos en minigolf. Disciplina, tecnica y valores deportivos en Vizela.',
+    hero_btn1:'Inscripciones Proximamente', hero_btn2:'Conocer la Academia',
+    stat1:'Anos de Historia', stat2:'Rango de Edad', stat3:'Ano de Inicio',
+    scroll:'Explorar',
+    strip1:'Formacion Estructurada', strip2:'Campo de Referência Nacional', strip3:'Competicion Regional y Nacional',
+    badge_arranque:'Inicio',
+    sobre_label:'Quienes Somos', sobre_title:'Un proyecto con raices profundas en Vizela',
+    sobre_p1:'La Academia Vizelgolfe nace de la experiencia y pasion de la Asociacion de Minigolf de Vizela — Vizelgolfe — con decadas de historial competitivo.',
+    sobre_p2:'Nuestro objetivo es ofrecer a ninos y jovenes de 7 a 16 anos un programa de formacion estructurado en uno de los mejores campos de minigolf de Portugal.',
+    sobre_p3:'En 2026, Vizela acoge el Campeonato Mundial Senior de Minigolf — SWC2026. La Academia es nuestro compromiso con el futuro de la modalidad.',
+    v1t:'Disciplina', v1p:'Metodologia estructurada y progresiva',
+    v2t:'Fair-Play', v2p:'Valores deportivos ante todo',
+    v3t:'Evolucion', v3p:'Evaluacion continua y personalizada',
+    v4t:'Comunidad', v4p:'Espiritu de equipo y pertenencia',
+    prog_label:'Formacion', prog_title:'Programa de Entrenamiento',
+    prog_sub:'Tres niveles adaptados a la edad y experiencia de cada atleta, con progresion clara y objetivos definidos.',
+    p1_age:'7 – 10 anos', p1_title:'Iniciacion', p1_desc:'Primer contacto con el minigolf. Desarrollo motor, conocimiento del material y reglas basicas.',
+    p1_l1:'Coordinacion y equilibrio', p1_l2:'Reglas fundamentales', p1_l3:'Juegos ludicos en el campo', p1_l4:'Espiritu deportivo',
+    p2_age:'11 – 13 anos', p2_title:'Desarrollo', p2_desc:'Tecnica de golpe, lectura del campo y primeras competiciones regionales.',
+    p2_l1:'Tecnica y postura', p2_l2:'Estrategia de juego', p2_l3:'Competiciones regionales', p2_l4:'Preparacion fisica basica',
+    p3_age:'14 – 16 anos', p3_title:'Especializacion', p3_desc:'Preparacion para competicion nacional. Analisis tactico y gestion de la presion.',
+    p3_l1:'Alta competicion', p3_l2:'Analisis y tactica', p3_l3:'Campeonatos nacionales', p3_l4:'Mentoria individual',
+    campo_label:'Instalaciones', campo_title:'El Campo de Vizela', campo_sub:'Un campo de referencia nacional, integrado en la naturaleza, con condiciones ideales para la formacion y la competicion internacional.',
+    gal1:'Campo Principal — Vizela', gal2:'Vista Panoramica', gal3:'Hoyos de Competicion', gal4:'En Competicion', gal5:'Jornada Nacional',
+    comp_label:'Alta Competicion', comp_title:'Del entrenamiento al podio',
+    comp_p1:'Los alumnos de la Academia Vizelgolfe participan en competiciones regionales y nacionales, representando a Vizela con orgullo y espiritu deportivo.',
+    comp_p2:'Vizelgolfe tiene decadas de historial competitivo y una comunidad solida. La Academia es la puerta de entrada para los jovenes.',
+    swc_title:'Campeonato Mundial Senior 2026 — Vizela',
+    swc_desc:'Vizelgolfe acoge el SWC2026 en octubre de 2026. Un hito historico para el minigolf portugues y para nuestra ciudad.',
+    insc_label:'Unete a Nosotros', insc_title:'Inscripciones',
+    insc_intro:'Rellena el formulario para inscribir a tu hijo en la Academia Vizelgolfe.',
+    insc_breve:'Las inscripciones de la Academia Vizelgolfe abren proximamente.<br>Contactanos para unirte a la lista de espera.',
+    f_atleta:'Nombre del Atleta', f_atleta_ph:'Nombre completo', f_nasc:'Fecha de Nacimiento', f_enc:'Nombre del Tutor', f_enc_ph:'Nombre completo',
+    f_tel:'Telefono', f_nivel:'Nivel', f_sel:'Seleccionar nivel',
+    f_n1:'Iniciacion (7–10 anos)', f_n2:'Desarrollo (11–13 anos)', f_n3:'Especializacion (14–16 anos)',
+    f_submit:'Enviar Inscripcion',
+    c_local:'Ubicacion', foot_contact:'Contacto', foot_rights:'Todos los derechos reservados',
+    status_closed:'Inscripciones Proximamente', status_open:'Inscripciones Abiertas',
+    alert_submit:'Gracias! Su inscripcion ha sido recibida. Nos pondremos en contacto pronto.'
+  },
+  de: {
+    nav_sobre:'Uber uns', nav_programa:'Programm', nav_campo:'Platz', nav_comp:'Wettbewerb', nav_insc:'Anmeldung', nav_cta:'Anmelden',
+    hero_badge:'Vizela · Portugal · 2026',
+    hero_desc:'Jugendausbildung von 7 bis 16 Jahren im Minigolf. Disziplin, Technik und sportliche Werte in Vizela.',
+    hero_btn1:'Anmeldung Demnachst', hero_btn2:'Die Akademie Entdecken',
+    stat1:'Jahre Geschichte', stat2:'Altersgruppe', stat3:'Grundungsjahr',
+    scroll:'Entdecken',
+    strip1:'Strukturierte Ausbildung', strip2:'Nationaler Referenzplatz', strip3:'Regionale und Nationale Wettbewerbe',
+    badge_arranque:'Start',
+    sobre_label:'Uber Uns', sobre_title:'Ein Projekt mit tiefen Wurzeln in Vizela',
+    sobre_p1:'Die Academia Vizelgolfe entsteht aus der Erfahrung und Leidenschaft des Minigolfverbands Vizela — Vizelgolfe — mit jahrzehntelanger Wettkampfgeschichte.',
+    sobre_p2:'Unser Ziel ist es, Kindern und Jugendlichen zwischen 7 und 16 Jahren ein strukturiertes Ausbildungsprogramm auf einem der besten Minigolfplatze Portugals zu bieten.',
+    sobre_p3:'2026 ist Vizela Gastgeber der Senioren-Minigolf-Weltmeisterschaft — SWC2026. Die Akademie ist unser Engagement fur die Zukunft des Sports.',
+    v1t:'Disziplin', v1p:'Strukturierte und progressive Methodik',
+    v2t:'Fair-Play', v2p:'Sportliche Werte uber allem',
+    v3t:'Entwicklung', v3p:'Kontinuierliche personliche Bewertung',
+    v4t:'Gemeinschaft', v4p:'Teamgeist und Zugehorigkeit',
+    prog_label:'Ausbildung', prog_title:'Trainingsprogramm',
+    prog_sub:'Drei Stufen, angepasst an Alter und Erfahrung jedes Athleten, mit klarer Progression und definierten Zielen.',
+    p1_age:'7 – 10 Jahre', p1_title:'Einstieg', p1_desc:'Erster Kontakt mit Minigolf. Motorische Entwicklung, Materialkunde und Grundregeln.',
+    p1_l1:'Koordination und Gleichgewicht', p1_l2:'Grundregeln', p1_l3:'Spielerische Spiele auf dem Platz', p1_l4:'Sportlicher Geist',
+    p2_age:'11 – 13 Jahre', p2_title:'Entwicklung', p2_desc:'Schlagtechnik, Platzlesen und erste regionale Wettbewerbe.',
+    p2_l1:'Technik und Haltung', p2_l2:'Spielstrategie', p2_l3:'Regionale Wettbewerbe', p2_l4:'Grundlegende korperliche Vorbereitung',
+    p3_age:'14 – 16 Jahre', p3_title:'Spezialisierung', p3_desc:'Vorbereitung fur nationale Wettkampfe. Taktische Analyse und Druckmanagement.',
+    p3_l1:'Hochleistungssport', p3_l2:'Analyse und Taktik', p3_l3:'Nationale Meisterschaften', p3_l4:'Individuelle Betreuung',
+    campo_label:'Anlage', campo_title:'Der Platz in Vizela', campo_sub:'Ein nationaler Referenzplatz, eingebettet in die Natur, mit idealen Bedingungen fur Ausbildung und internationale Wettbewerbe.',
+    gal1:'Hauptplatz — Vizela', gal2:'Panoramablick', gal3:'Wettkampfbahnen', gal4:'Im Wettbewerb', gal5:'Nationale Runde',
+    comp_label:'Hochleistung', comp_title:'Vom Training zum Podium',
+    comp_p1:'Die Athleten der Academia Vizelgolfe nehmen an regionalen und nationalen Wettbewerben teil und vertreten Vizela mit Stolz und sportlichem Geist.',
+    comp_p2:'Vizelgolfe hat jahrzehntelange Wettkampfgeschichte und eine starke Gemeinschaft. Die Akademie ist der Einstiegspunkt fur Jugendliche.',
+    swc_title:'Senioren-Weltmeisterschaft 2026 — Vizela',
+    swc_desc:'Vizelgolfe ist Gastgeber des SWC2026 im Oktober 2026. Ein historischer Meilenstein fur den portugiesischen Minigolfsport.',
+    insc_label:'Mitmachen', insc_title:'Anmeldung',
+    insc_intro:'Fullen Sie das Formular aus, um Ihr Kind in der Academia Vizelgolfe anzumelden.',
+    insc_breve:'Die Anmeldungen fur die Academia Vizelgolfe offnen bald.<br>Kontaktieren Sie uns, um sich auf die Warteliste zu setzen.',
+    f_atleta:'Name des Athleten', f_atleta_ph:'Vollstandiger Name', f_nasc:'Geburtsdatum', f_enc:'Name des Erziehungsberechtigten', f_enc_ph:'Vollstandiger Name',
+    f_tel:'Telefon', f_nivel:'Stufe', f_sel:'Stufe wahlen',
+    f_n1:'Einstieg (7–10 Jahre)', f_n2:'Entwicklung (11–13 Jahre)', f_n3:'Spezialisierung (14–16 Jahre)',
+    f_submit:'Anmeldung Einreichen',
+    c_local:'Standort', foot_contact:'Kontakt', foot_rights:'Alle Rechte vorbehalten',
+    status_closed:'Anmeldung Demnachst', status_open:'Anmeldung Offen',
+    alert_submit:'Danke! Ihre Anmeldung wurde erhalten. Wir melden uns bald.'
+  }
+};
+
+let currentLang = 'pt';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
+  const t = i18n[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    if (t[key] !== undefined) el.placeholder = t[key];
+  });
+  updateInscStatus();
+}
+
+function updateInscStatus() {
+  const t = i18n[currentLang];
+  const statusEl = document.getElementById('insc-status');
+  const formEl   = document.getElementById('insc-form-wrap');
+  const breveEl  = document.getElementById('insc-breve');
+  if (INSCRICOES_ABERTAS) {
+    statusEl.innerHTML = '<div class="status-badge open"><span class="status-dot"></span>' + t.status_open + '</div>';
+    formEl.classList.remove('hidden');
+    breveEl.classList.add('hidden');
+  } else {
+    statusEl.innerHTML = '<div class="status-badge closed"><span class="status-dot"></span>' + t.status_closed + '</div>';
+    formEl.classList.add('hidden');
+    breveEl.classList.remove('hidden');
+  }
+}
+
+function submitForm() {
+  alert(i18n[currentLang].alert_submit);
+}
+
+// Init
+updateInscStatus();
+
+// Nav scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
