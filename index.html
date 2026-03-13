@@ -79,7 +79,7 @@ nav.scrolled{
 .hero{height:100vh;min-height:640px;position:relative;display:flex;align-items:center;overflow:hidden;padding-top:64px}
 .hero-bg{
   position:absolute;inset:0;
-  background-image:url('imagens/hero.jpg');
+  background-image:url('imagens/herói.jpg');
   background-size:cover;background-position:center 40%;
   filter:brightness(0.7);
   animation:slowzoom 30s ease-in-out infinite alternate;
@@ -477,7 +477,7 @@ footer{background:#050d20;padding:44px 60px 30px}
     </div>
     <div id="insc-breve" data-i18n="insc_breve">As inscrições para a Academia Vizelgolfe abrem em breve.<br>Entra em contacto connosco para ficares na lista de espera.</div>
     <div class="contact-strip">
-      <div class="contact-item"><div class="label">Email</div><div class="value"><a href="mailto:academia@academiavizelgolfe.org">academia@academiavizelgolfe.org</a></div></div>
+      <div class="contact-item"><div class="label">Email</div><div class="value"><a href="/cdn-cgi/l/email-protection#ff9e9c9e9b9a92969ebf9e9c9e9b9a92969e8996859a93989093999ad1908d98"><span class="__cf_email__" data-cfemail="1372707277767e7a725372707277767e7a72657a69767f747c7f75763d7c6174">[email&#160;protected]</span></a></div></div>
       <div class="contact-item"><div class="label" data-i18n="c_local">Localização</div><div class="value">Vizela, Portugal</div></div>
       <div class="contact-item"><div class="label">Facebook</div><div class="value"><a href="https://facebook.com/AcademiaVizelgolfe" target="_blank">AcademiaVizelgolfe</a></div></div>
       <div class="contact-item"><div class="label">Instagram</div><div class="value"><a href="https://instagram.com/academiavizelgolfe" target="_blank">@academiavizelgolfe</a></div></div>
@@ -503,13 +503,13 @@ footer{background:#050d20;padding:44px 60px 30px}
       <a href="https://swc2026-vizela.pt" target="_blank">SWC2026</a>
       <a href="https://facebook.com/AcademiaVizelgolfe" target="_blank">Facebook</a>
       <a href="https://instagram.com/academiavizelgolfe" target="_blank">Instagram</a>
-      <a href="mailto:academia@academiavizelgolfe.org" data-i18n="foot_contact">Contacto</a>
+      <a href="/cdn-cgi/l/email-protection#7b1a181a1f1e16121a3b1a181a1f1e16121a0d12011e171c14171d1e5514091c" data-i18n="foot_contact">Contacto</a>
     </div>
   </div>
   <div class="foot-copy">© 2026 Academia Vizelgolfe · Vizelgolfe — Associação de Minigolfe de Vizela · <span data-i18n="foot_rights">Todos os direitos reservados</span></div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ═══════════════════════════════════
 // PARA ABRIR INSCRICOES: mudar para true
 const INSCRICOES_ABERTAS = false;
@@ -735,14 +735,4 @@ updateInscStatus();
 
 // Nav scroll
 window.addEventListener('scroll', () => {
-  document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 60);
-});
-
-// Scroll reveal
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, {threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
-</body>
-</html>
+  document.getElementById('main-nav').classList.tog
